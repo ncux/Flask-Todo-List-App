@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo List App</title>
+    <link href="https://bootswatch.com/4/superhero/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="row align-content-center mx-auto">
+
+    <div class="col-5 align-content-center mx-auto">
+
+        <h1 class="text-center my-3">Todo List App</h1>
+
+        <br>
+
+            <form action="{{ url_for('add') }}" method="post">
+
+                <label>Add a todo</label>
+                     <input name="todo" type="text" class="form-control"> <br>
+                <button type="submit" class="btn btn-success">Add todo</button>
+
+            </form>
+
+        <br>
+
+      <h4>Incomplete Todos</h4>
+
+        <ul class="list-group">
+
+          {% for todo in incomplete_todos %}
+            <li class="list-group-item list-group-item-active my-1">
+              {{ todo.content }} <a href="{{ url_for('completed', id=todo.id) }}" class="btn btn-info" style="float: right">Mark as completed</a>
+            </li>
+
+          {% endfor %}
+        </ul>
+
+    <br>
+
+    <h5>Completed Todos</h5>
+
+        <ul class="list-group">
+
+          {% for todo in completed_todos %}
+            <li class="list-group-item list-group-item-active my-1">
+              {{ todo.content }} <a href="{{ url_for('delete', id=todo.id) }}" class="btn btn-danger" style="float: right">Delete</a>
+            </li>
+
+          {% endfor %}
+        </ul>
+
+
+    </div>
+
+
+
+</div>
+
+
+</body>
+</html>
